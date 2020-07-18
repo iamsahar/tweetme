@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if query %}
+  <h2>Results for "{{ query|escape }}":</h2>
+  {% if results %}
+    {% for post in results %}
+      <article class="media content-section">
+        <div class="media-body">
+          <div class="article-metadata">
+            <img class="img-circle article-img" src="{{ post.author.profile.image.url }}">
+            <a class="mr-2" href="#">@{{ post.author }}</a>
+            <small class="text-muted">{{ post.date_posted | date:"F d, Y" }}</small>
+            <div class="dropdown">
+              <span class="iconify" data-icon="feather-chevron-down" data-inline="false" data-toggle="dropdown"></span>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                <li role="presentation"><a href="#"><span class="iconify" data-icon="feather-repeat" data-inline="false" data-width="20px"></span>Repeat</a></li>
+                <li role="presentation"><a href="#"><span class="iconify" data-icon="feather-upload" data-inline="false" data-width="20px"></span>Upload</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="post-img">
+            {% if post.upload_file %}
+              <img class="col-sm-12" src="{{ post.upload_file.url}}" alt="{{ post.content }}">
+            {% endif %}
+          </div>
+          <a href="{% url 'post_detail' post.pk %}">{{ post|escape }}</a>
+          <div class="row">
+            <div class="col-12 col-md-3"><a href="{% url 'add_comment_to_post' post.pk %}"><i class="far fa-comment" data-width="20px"></i></a></div>
+            <div class="col-12 col-md-3"><a href="{% url 'post_delete' post.pk %}"><i class="far fa-trash-alt" data-width="20px"></i></a></div>
+            <div class="col-12 col-md-3" id="favourite-section">
+              {% csrf_token %}
+              {% if is_favourite %}
+                <a href="{% url 'favourite_post' pk=post.pk %}">
+                  <i class="fas fa-heart" data-width="20px"></i>
+                </a>
+              {% else %}
+                <a href="{% url 'favourite_post' pk=post.pk %}">
+                  <i class="far fa-heart" data-width="20px"></i>
+                </a>
+              {% endif %}
+              {{ total_favourites }}
+            </div>
+            <div class="col-12 col-md-3">
+              {% if is_bookmark %}
+                <a href="{% url 'bookmark_post' pk=post.pk %}">
+                  <i class="fas fa-bookmark" data-width="20px"></i>
+                </a>
+              {% else %}
+                <a href="{% url 'bookmark_post' pk=post.pk %}">
+                  <i class="far fa-bookmark" data-width="20px"></i>
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </article>
+    {% endfor %}
+  {% else %}
+    <p>No post found</p>
+  {% endif %}
+{% endif %}
+
+{% endblock content %}

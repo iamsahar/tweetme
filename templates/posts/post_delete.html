@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <h2><b>Delete post</b></h2>
+    <article class="media content-section">
+        <div class="media-body">
+            <form action="" method="post">
+                {% csrf_token %}
+                <h4>Are you sure you want to delete "{{ post.content }}"?</h4>
+                <h4><input type="submit" value="Confirm" /></h4>
+            </form>
+        </div>
+    </article>
+{% endblock content %}

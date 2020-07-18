@@ -1,0 +1,156 @@
+body {
+    background: #fafafa;
+    color: #333;
+    margin-top: 5rem;
+}
+
+.main {
+    margin-left: 20%;
+}
+
+.content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    margin-right: 0%;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+.trend-section {
+    background: #fff;
+    padding: 10px 20px;
+    margin-right: 10%;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+.search{
+    background-color: #fff;
+    padding: 10px 20px;
+    margin-right: 10%;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    position: relative;
+    display: block;
+    width: 90%;
+}
+
+.post-img {
+    height: 100%;
+    width: 100%;
+}
+
+.article-content {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+}
+
+.article-content a:hover {
+    color: #00acee;
+    text-decoration: none;
+}
+
+.article-img {
+    height: 50px;
+    width: 50px;
+    margin: 0px;
+}
+
+.article-metadata {
+    padding-bottom: 5px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #e3e3e3
+}
+
+.article-metadata a:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+.dropdown {
+    position: inherit;
+    margin-top: 16px;
+    float: right;
+}
+
+.account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+}
+
+.article-metadata {
+    /* padding-bottom: 1px; */
+    margin-bottom: 4px;
+    /* border-bottom: 1px solid #e3e3e3 */
+}
+
+.article-metadata a:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+.account-heading {
+    font-size: 2.5rem;
+}
+
+.sidenav {
+    height: 120%;
+    width: 15%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+    padding-top: 4%;
+}
+
+.sidenav a {
+    padding: 0% 0% 6% 0%;
+    text-decoration: none;
+    font-size: 25px;
+    color: #333;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #00acee;
+}
+
+@media screen and (max-height: 100%) {
+    .sidenav {
+        padding-top: 6%;
+    }
+
+    .sidenav a {
+        font-size: 100%;
+    }
+}
+
+.container {
+    align-content: center;
+    margin-top: 5%;
+    width: 60%;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+}
+
+.topnav a {
+    float: right;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 20px 15px 5px 15px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+    color: #00acee;
+}

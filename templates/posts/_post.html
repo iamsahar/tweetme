@@ -1,0 +1,39 @@
+{% comment %} {% extends "base.html" %}
+
+
+{% block content %}
+<main role="main" class="container"> 
+    <div class="row">
+        <div class="col-md-8">
+            {% block post_content %}
+                
+            {% endblock post_content %}
+        </div>
+        <div class="col-md-4">
+            <h2><b>Trends for you</b></h2>
+            <div class="content-section">
+                <p class='text-muted'>You can put any information here you'd like.
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-light">Latest Posts</li>
+                    <li class="list-group-item list-group-item-light">Announcements</li>
+                    <li class="list-group-item list-group-item-light">Calendars</li>
+                    <li class="list-group-item list-group-item-light">etc</li>
+                </ul>
+                </p>
+            </div>
+        </div>
+
+        {% comment %} <div class="col-sm-4">
+            <br>
+            <form method="GET" action="search">
+                <input type="text" name="q" placeholder="Search Sylvester" value='{{ request.GET.q }}' />
+                <input type="submit" value="Search" />
+            </form>
+            <h2><b>Trends for you</b></h2>
+            {% for post in object_list|dictsortreversed:"total_favourites"|slice:"3" %}
+                <a href="{% url 'post_detail' post.pk %}"><h3>{{ post.body }}</h3></a>
+            {% endfor %}
+        </div> {% endcomment %}
+    </div>
+</div>
+{% endblock %} {% endcomment %}

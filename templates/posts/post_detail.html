@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load hashtag %}
+
+
+{% block content %}
+<h2><b>Tweet</b></h2>
+{% if request.user.is_authenticated %}
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+                <img class="img-circle article-img" src="{{ post.author.profile.image.url }}">
+                <a class="mr-2" href="#">@{{ post.author }}</a>
+                <small class="text-muted">{{ post.date_posted | date:"F d, Y" }}</small>
+                <div class="dropdown">
+                    <span class="iconify" data-icon="feather-chevron-down" data-inline="false" data-toggle="dropdown"></span>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                        <li role="presentation"><a href="#"><span class="iconify" data-icon="feather-repeat" data-inline="false" data-width="20px"></span>Repeat</a></li>
+                        <li role="presentation"><a href="#"><span class="iconify" data-icon="feather-upload" data-inline="false" data-width="20px"></span>Upload</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="post-img">
+                {% if post.upload_file %}
+                    <img class="col-sm-12" src="{{ post.upload_file.url}}" alt="{{ post.content }}">
+                {% endif %}
+            </div>
+            <div class="article-content">
+                {% for name in post.name %}
+                    {% if name|first in '#' %}
+                        <a href="/search/?q={{ name|hashtag }}">{{ name }}</a>
+                    {% else %}
+                        {{ name }}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="row">
+                <div class="col-6 col-md-2"><a href="{% url 'add_comment_to_post' post.pk %}"><i class="far fa-comment" data-width="20px"></i></a></div>
+                <div class="col-6 col-md-2"><a href="{% url 'post_delete' post.pk %}"><i class="far fa-trash-alt" data-width="20px"></i></a></div>
+                <div class="col-6 col-md-2" id="favourite-section">
+                    {% csrf_token %}
+                    {% if is_favourite %}
+                        <a href="{% url 'favourite_post' pk=post.pk %}">
+                            <i class="fas fa-heart" data-width="20px"></i>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'favourite_post' pk=post.pk %}">
+                            <i class="far fa-heart" data-width="20px"></i>
+                        </a>
+                    {% endif %}
+                    {{ total_favourites }}
+                </div>
+                <div class="col-6 col-md-2">
+                    {% if is_bookmark %}
+                        <a href="{% url 'bookmark_post' pk=post.pk %}">
+                            <i class="fas fa-bookmark" data-width="20px"></i>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'bookmark_post' pk=post.pk %}">
+                            <i class="far fa-bookmark" data-width="20px"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <hr/>
+            <div class="main-footer">
+                {% for comment in post.comments.all %}
+                {% if user.is_authenticated %}
+                    <h3>
+                        {{ comment }}
+                        <div class="dropdown" style="float: right;">
+                            <span class="iconify" data-icon="feather-chevron-down" data-inline="false" data-toggle="dropdown"></span>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                <li role="presentation"><a href="{% url 'comment_remove' comment.pk %}"><span class="iconify" data-icon="bytesize-trash" data-inline="false"></span> Delete Comment </a></li>
+                            </ul>
+                        </div>
+                        <hr/>
+                    </h3>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </article>
+{% endif %}
+{% endblock content %}

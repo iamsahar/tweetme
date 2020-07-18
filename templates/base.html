@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter</title>
+
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@600&display=swap" rel="stylesheet">
+
+    <!-- Static -->
+    <link href="{% static 'posts/base.css' %}" rel="stylesheet">
+
+    <!-- Importing Icons -->
+    <script src="https://code.iconify.design/1/1.0.5/iconify.min.js"></script>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    
+    <!-- Importing Icons from https://fontawesome.com/how-to-use/on-the-web/setup/upgrading-from-version-4 -->
+    <script defer src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.13.0/js/v4-shims.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css">
+
+    <!-- Navbar -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body style="font-family: 'Crimson Text', serif;">
+    <div>
+    {% if user.is_authenticated %}
+        <div class="sidenav">
+            <a style="margin-left: 60%;" href="{% url 'home' %}">
+                <span class="iconify" data-icon="logos-twitter" data-inline="false"></span>
+            </a>
+            <a style="margin-left: 60%;" href="{% url 'home' %}">
+                <span class="iconify" data-icon="bx-bx-home-circle" data-inline="false"></span>
+            </a>
+
+            <a style="margin-left: 60%;" href="#HashtagTrendsForYou">
+                <span class="iconify" data-icon="feather-hash" data-inline="false"></span>
+            </a>
+
+            <a style="margin-left: 60%;" href="#BellNotifications">
+                <span class="iconify" data-icon="ic-round-notifications" data-inline="false"></span>
+            </a>
+
+            <a style="margin-left: 60%;" href="#Messages">
+                <span class="iconify" data-icon="feather-mail" data-inline="false"></span>
+            </a>
+
+            <a style="margin-left: 60%;" href="{% url 'bookmark_post_list' %}">
+                <span class="iconify" data-icon="feather-bookmark" data-inline="false"></span>
+            </a>
+
+            <a style="margin-left: 60%;" href="#Lists">
+                <span class="iconify" data-icon="feather-file-text" data-inline="false"></span>
+            </a>
+
+            <a style="margin-left: 60%;" href="{% url 'profile' %}">
+                <span class="iconify" data-icon="feather-smile" data-inline="false"></span>
+            </a>
+
+            <a style="margin-left: 60%;" href="{% url 'logout' %}">
+                <span class="iconify" data-icon="feather-more-vertical" data-inline="false"></span>
+            </a>
+
+            <a style="margin-left: 60%;" href="{% url 'post_new' %}">
+                <span class="iconify" data-icon="fa-solid:feather-alt" data-inline="false"></span>
+            </a>
+        </div>
+        <main class="main">
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <div class="content-section">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tag }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        {% block content %}{% endblock content %}
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <form method="GET" action="{% url 'search' %}">
+                        <input class="search" name="q" value="{{request.GET.q}}" placeholder="Search Twitter">
+                    </form>
+                    <div class="media trend-section">
+                        <h3>Trends for you</h3>
+                        <p class='text-muted'>You can put any information here you'd like.
+                        <ul class="list-group">
+                            {% for post in object_list|dictsortreversed:"total_favourites"|slice:"3" %}
+                                <li class="list-group-item list-group-item-light">
+                                    <a href="{% url 'post_detail' post.pk %}"><p>{{ post.content }}</p></a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                {% comment %} <div class="col-sm-4">
+                    <br>
+                    <form method="GET" action="search">
+                        <input type="text" name="q" placeholder="Search Sylvester" value='{{ request.GET.q }}' />
+                        <input type="submit" value="Search" />
+                    </form>
+                    <h2><b>Trends for you</b></h2>
+                    {% for post in object_list|dictsortreversed:"total_favourites"|slice:"3" %}
+                        <a href="{% url 'post_detail' post.pk %}"><h3>{{ post.body }}</h3></a>
+                    {% endfor %}
+                </div> {% endcomment %}
+            </div>
+        </main>
+        {% else %}
+        <div class="topnav">
+            <a style="float: left; font-size: 25px;" href="{% url 'home' %}">
+                <span class="iconify" data-icon="logos-twitter" data-inline="false"></span>
+            </a>
+            <a href="#threeDots"><span class="iconify" data-icon="feather-more-horizontal" data-inline="false"></span></a>
+            <a href="{% url 'login' %}" class="btn btn-simple">Log in</a>
+            <a href="{% url 'register' %}" class="btn btn-simple">Register</a>
+            <a style="float: left;" href="#SearchBox">Twitter</a>
+        </div>
+        <div class="container">
+            {% block users_content %}{% endblock users_content %}
+        </div>
+        {% endif %}
+    </div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>
