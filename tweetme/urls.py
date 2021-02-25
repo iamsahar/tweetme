@@ -22,12 +22,12 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'admin/', admin.site.urls),
-    url(r'register/', user_views.register, name="register"),
-    url(r'profile/', user_views.profile, name="profile"),
-    url(r'login/', auth_views.LoginView.as_view(template_name="users/login.html"), name="login"),
-    url(r'logout/', auth_views.LogoutView.as_view(template_name="users/logout.html"), name="logout"),
-    # url(r'^connect/(?P<operation>.+)/(?P<pk>\d+)/$', user_views.change_friends, name="change_friends"),
+    # url(r'register/', user_views.register, name="register"),
+    # url(r'profile/', user_views.profile, name="profile"),
+    # url(r'login/', auth_views.LoginView.as_view(template_name="users/login.html"), name="login"),
+    # url(r'logout/', auth_views.LogoutView.as_view(template_name="users/logout.html"), name="logout"),
     url(r'', include('posts.urls')),
+    url(r'', include('users.urls')),
 ]
 
 if settings.DEBUG:
