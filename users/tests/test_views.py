@@ -1,15 +1,3 @@
-# # from django.test import TestCase
-
-# # class TestSignupView(TestCase):
-
-# #     def setUp(self):
-# #         self.username = "user"
-# #         self.email = "user@test.com"
-# #         self.password = "test.1234"
-
-# #     def test_signup_view(self):
-
-
 # import pytest
 # from django import urls
 

@@ -6,6 +6,23 @@
 
 
 # @pytest.fixture
+# def user_client(client):
+#     """
+#     User fixture for tests with unprivileged user
+#     """
+#     user = User.objects.create_user(
+#         username='user',
+#         email='user@test.com',
+#         password='pass1234',
+#     )
+#     response = client.post(reverse('register'), data={
+#                            'username': 'user', 'email': 'sahar@test.com', 'password': 'pass1234'})
+
+#     assert response.status_code == 302
+#     return user_client
+
+
+# @pytest.fixture
 # def user():
 #     return User.objects.create(is_active=True)
 
@@ -25,22 +42,3 @@
 #         'register/', data={"username": "sahar", "email": "sahar@test.com", "password": "123456"})
 #     assert User.objects.count == 1
 #     assert user.object.last().username == 'sahar'
-
-
-# @pytest.fixture
-# def user_client(client):
-#     """
-#     User fixture for tests with unprivileged user
-#     """
-#     user = User.objects.create_user(
-#         username='user',
-#         email='user@test.com',
-#         password='pass1234',
-#     )
-#     response = client.post(reverse('register'), data={
-#                            'username': 'user', 'email': 'sahar@test.com', 'password': 'pass1234'})
-
-   
-#     assert response.status_code == 302
-#     return user_client
-
