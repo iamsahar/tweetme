@@ -1,6 +1,6 @@
 # import pytest
-# # # from django.contrib.auth.models import User
 # from django.contrib.auth import get_user_model
+# from users.models import Profile
 
 # User = get_user_model()
 
@@ -23,22 +23,31 @@
 
 
 # @pytest.fixture
-# def user():
-#     return User.objects.create(is_active=True)
+# def user_client():
+#     user = User.objects.create(username="sahar",
+#                                email="sahar@test.com",
+#                                password="123456")
+#     return User.objects.create(user)
 
-# @pytest.mark.django_db
-# def test_deactivate(user):
-#     user.deactivate()
-#     assert not user.is_active
 
-# @pytest.mark.django_db
-# def test_deactivate_activate(user):
-#     user.deactivate()
-#     user.activate()
-#     assert user.is_active
+# def profile_client():
+#     profile = Profile.objects.create(user=user_client)
+#     return Profile.objects.create(profile)
+
+# # @pytest.mark.django_db
+# # def test_deactivate(user):
+# #     user.deactivate()
+# #     assert not user.is_active
+
+# # @pytest.mark.django_db
+# # def test_deactivate_activate(user):
+# #     user.deactivate()
+# #     user.activate()
+# #     assert user.is_active
+
 
 # def test(client):
 #     response = client.post(
-#         'register/', data={"username": "sahar", "email": "sahar@test.com", "password": "123456"})
-#     assert User.objects.count == 1
-#     assert user.object.last().username == 'sahar'
+#         'profile/', data={"user": "sahar"})
+#     assert Profile.objects.count == 1
+#     assert profile_client.objects.last().user == "sahar"
