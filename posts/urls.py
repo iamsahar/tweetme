@@ -2,8 +2,7 @@ from django.urls import re_path
 from . import views
 
 urlpatterns = [
-    re_path(r'^post/(?P<pk>\d+)/comment/$',
-         views.add_comment_to_post, name='add_comment_to_post'),
+    re_path(r'^post/(?P<pk>\d+)/comment/$', views.add_comment_to_post, name='add_comment_to_post'),
     re_path(r'^comment/(?P<pk>\d+)/remove/$', views.comment_remove, name='comment_remove'),
     re_path(r'^post/(?P<pk>\d+)/delete/$', views.PostDeleteView.as_view(), name='post_delete'),
     re_path(r'^post/(?P<pk>\d+)/favourite/$', views.favourite_post, name='favourite_post'),

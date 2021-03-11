@@ -38,10 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users.apps.UsersConfig',
+    'accounts.apps.AccountsConfig',
     'posts.apps.PostsConfig',
     'crispy_forms',
 ]
+
+AUTH_USER_MODEL = 'accounts.MyUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

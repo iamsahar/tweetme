@@ -1,17 +1,21 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
+
 from django.urls import reverse
 from django import template
+
+from accounts.models import MyUser
+
+
+AUTH_USER_MODEL = 'accounts.MyUser'
+
 
 class Post(models.Model):
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    favourite = models.ManyToManyField(
-        'auth.User', related_name='favourite', blank=True)
-    bookmark = models.ManyToManyField(
-        'auth.User', related_name='bookmark', blank=True)
+    author = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
+    favourite = models.ManyToManyField(AUTH_USER_MODEL, related_name='favourite', blank=True)
+    bookmark = models.ManyToManyField(AUTH_USER_MODEL, related_name='bookmark', blank=True)
     upload_file = models.FileField(
         upload_to='upload_files/', blank=True)
 

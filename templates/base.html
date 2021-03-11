@@ -67,11 +67,11 @@
                 <span class="iconify" data-icon="feather-file-text" data-inline="false"></span>
             </a>
 
-            <a style="margin-left: 60%;" href="{% url 'profile' %}">
+            <a style="margin-left: 60%;" href="{% url 'accounts:profile' %}">
                 <span class="iconify" data-icon="feather-smile" data-inline="false"></span>
             </a>
 
-            <a style="margin-left: 60%;" href="{% url 'logout' %}">
+            <a style="margin-left: 60%;" href="{% url 'accounts:logout' %}">
                 <span class="iconify" data-icon="feather-more-vertical" data-inline="false"></span>
             </a>
 
@@ -129,12 +129,12 @@
                 <span class="iconify" data-icon="logos-twitter" data-inline="false"></span>
             </a>
             <a href="#threeDots"><span class="iconify" data-icon="feather-more-horizontal" data-inline="false"></span></a>
-            <a href="{% url 'login' %}" class="btn btn-simple">Log in</a>
-            <a href="{% url 'register' %}" class="btn btn-simple">Register</a>
+            <a href="{% url 'accounts:login' %}" class="btn btn-simple">Login</a>
+            <a href="{% url 'accounts:register' %}" class="btn btn-simple">Register</a>
             <a style="float: left;" href="#SearchBox">Twitter</a>
         </div>
         <div class="container">
-            {% block users_content %}{% endblock users_content %}
+            {% block accounts_content %}{% endblock accounts_content %}
         </div>
         {% endif %}
     </div>

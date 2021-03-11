@@ -10,7 +10,7 @@
             <div class="media-body">
                 <div class="article-metadata">
                     <img class="img-circle article-img" src="{{ post.author.profile.image.url }}">
-                    <a class="mr-2" href="#">@{{ post.author }}</a>
+                    <a class="mr-2" href="#">@{{ post.author.username }}</a>
                     <small class="text-muted">{{ post.date_posted | date:"F d, Y" }}</small>
                     <div class="dropdown">
                         <span class="iconify" data-icon="feather-chevron-down" data-inline="false" data-toggle="dropdown"></span>

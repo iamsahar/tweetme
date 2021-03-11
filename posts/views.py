@@ -4,8 +4,7 @@ from .models import Post, Comment
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import CommentForm
-from django.shortcuts import render, get_object_or_404
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from .forms import PostForm
@@ -44,14 +43,6 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
 #######################################
 ## Functions that require a pk match ##
 #######################################
-# def home_view(request):
-#     qs = Post.objects.all()
-#     context = {
-#         'queryset_list': qs,
-#     }
-#     return render(request, 'home.html', context)
-
-
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     is_favourite = False
