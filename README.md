@@ -25,14 +25,6 @@ brew install python@<python_version>
 ```
 This app uses the default Django database (sqlite3) so you don't need install anything for DB.
 
-```bash
-# On Linux:
-sudo apt-get install binutils libproj-dev gdal-bin libmagic-dev
-
-# On Mac:
-brew install gdal libmagic
-```
-
 ### Python environment
 
 In order to keep the development process tidy, you should use a virtual environment when installing application-specific packages. There are multiple ways to set up virtual environments (e.g. using Pipenv), but the example below shows how you can do this using the native tools:
